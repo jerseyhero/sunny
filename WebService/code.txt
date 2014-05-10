@@ -1,0 +1,2 @@
+1.cd E:\Workspaces\WebService
+2.wsimport -p client -keep http://localhost:8080/WebServiceTest/Hello?wsdl
