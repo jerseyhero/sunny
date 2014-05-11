@@ -32,7 +32,7 @@ public class HibernateGenericDao<T> extends HibernateDaoSupport {
      */
     @SuppressWarnings("unchecked")
     public List<T> find(String hql, Object... values) throws DataAccessException {
-	Assert.hasText(hql);
+//	Assert.hasText(hql);
 	return getHibernateTemplate().find(hql, values);
     }
 
