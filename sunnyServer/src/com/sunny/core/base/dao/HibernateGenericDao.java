@@ -22,7 +22,7 @@ public class HibernateGenericDao<T> extends HibernateDaoSupport {
 
     @Resource(name = "sessionFactory")
     public void setSuperSessionFactory(SessionFactory sessionFactory) {
-	super.setSessionFactory(sessionFactory);
+    	super.setSessionFactory(sessionFactory);
     }
 
     /**
