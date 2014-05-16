@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+	                    http://www.springframework.org/schema/tx 
+	                    http://www.springframework.org/schema/tx/spring-tx.xsd
+	                    http://www.springframework.org/schema/context
+	                    http://www.springframework.org/schema/context/spring-context-3.1.xsd" default-autowire="byName">
+
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${driverClass}" />
+		<property name="jdbcUrl" value="${jdbcUrl}" />
+        <property name="user" value="${user}" />
+        <property name="password" value="${password}" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- <property name="mappingLocations" value="classpath:/com/sunny/**/model/**/*.hbm.xml" /> -->
+		<property name="packagesToScan" value="com.sunny.**.model.*"/>
+		<property name="hibernateProperties">
+                <props>
+                        <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+                        <prop key="hibernate.show_sql">true</prop>
+                        <prop key="hibernate.format_sql">true</prop>
+                        <prop key="hibernate.jdbc.fetch_size">50</prop>
+                        <prop key="hibernate.jdbc.batch_size">25</prop>
+                        <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+                </props>
+        </property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<context:component-scan base-package="com.sunny" />
+	<tx:annotation-driven transaction-manager="transactionManager" /></beans>
