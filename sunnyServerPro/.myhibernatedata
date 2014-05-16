@@ -1,0 +1,17 @@
+#MyEclipse Hibernate Properties
+#Thu May 15 20:29:07 CST 2014
+genVersionTag=false
+sessionFactoryName=com.sunny.HibernateSessionFactory
+genAnnotations=false
+configFile=/sunnyServerPro/src/applicationContext.xml
+reStrategyClass=
+sessionFactoryId=sessionFactory
+profile=
+detectM2M=false
+genBasicCompId=false
+keyGenerator=
+createConfigFile=true
+basePersistenceClass=
+detectO2O=false
+useJavaTypes=true
+reSettingsFile=
